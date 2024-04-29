@@ -87,8 +87,10 @@ services:
       - ./prometheus:/etc/prometheus/
     depends_on:
       - cadvisor
+      - node-exporter
     links:
       - cadvisor:cadvisor
+      - node-exporter:node-exporter
 
 networks:
   internal:
