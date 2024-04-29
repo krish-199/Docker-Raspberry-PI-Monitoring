@@ -77,7 +77,7 @@ services:
 #      - '--storage.tsdb.retention.size=10GB'
     networks:
       - internal
-    expose:
+    ports:
       - "9090:9090"
     extra_hosts:
       - "host.docker.internal:host-gateway"
