@@ -79,6 +79,8 @@ services:
       - internal
     expose:
       - 9090
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       # /!\ To be modified depending on your needs /!\
       - ./prometheus/data:/prometheus
