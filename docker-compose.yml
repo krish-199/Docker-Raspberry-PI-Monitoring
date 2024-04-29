@@ -48,14 +48,13 @@ services:
     image: prom/node-exporter:latest
     hostname: rpi-exporter
     restart: unless-stopped
-    networks:
-      - internal
-    expose:
-      - 9100
+    network_mode: host
+    ports:
+      - 9100:9100
     command:
       - --path.procfs=/host/proc
       - --path.sysfs=/host/sys
-      - --path.rootfs=/host
+      - --path.rootfs=/rootfs
       - --collector.filesystem.ignored-mount-points
       - ^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)
     volumes:
@@ -86,10 +85,8 @@ services:
       - ./prometheus:/etc/prometheus/
     depends_on:
       - cadvisor
-      - node-exporter
     links:
       - cadvisor:cadvisor
-      - node-exporter:node-exporter
 
 networks:
   internal:
